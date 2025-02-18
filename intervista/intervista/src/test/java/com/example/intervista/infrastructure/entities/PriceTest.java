@@ -14,18 +14,18 @@ public class PriceTest {
 
     @BeforeEach
     public void setUp() {
-        // Créer un objet Price avec des valeurs de test
+        // create an object with value for testing
         price = new Price(1, LocalDateTime.parse("2020-06-14T00:00:00"),
                 LocalDateTime.parse("2020-06-14T23:59:59"), 1L, 35455L, 1, 35.50, "EUR");
     }
 
     @Test
     public void testToEntity() {
-        // Créer un PriceModel
+        // Create the model PriceModel
         PriceModel priceModel = new PriceModel(1L, 1, LocalDateTime.parse("2020-06-14T00:00:00"),
                 LocalDateTime.parse("2020-06-14T23:59:59"), 1L, 35455L, 1, 35.50, "EUR");
 
-        // Tester la conversion de PriceModel à Price
+        // Test conversion from model to entity
         Price priceEntity = Price.toEntity(priceModel);
 
         assertNotNull(priceEntity);
@@ -41,7 +41,7 @@ public class PriceTest {
 
     @Test
     public void testToModel() {
-        // Tester la conversion de Price à PriceModel
+        // Test conversion from entity to model
         PriceModel priceModel = price.toModel();
 
         assertNotNull(priceModel);
@@ -57,7 +57,7 @@ public class PriceTest {
 
     @Test
     public void testConstructor() {
-        // Tester le constructeur de Price
+        // Test constructor of entity
         Price priceTest = new Price(1, LocalDateTime.parse("2020-06-14T00:00:00"),
                 LocalDateTime.parse("2020-06-14T23:59:59"), 1L, 35455L, 1, 35.50, "EUR");
 
@@ -74,7 +74,7 @@ public class PriceTest {
 
     @Test
     public void testBuilder() {
-        // Tester constrctor of Price with builder
+        // Tester the design pattern builder
         Price priceTest = Price.builder()
                 .brandId(1)
                 .productId(35455L)
