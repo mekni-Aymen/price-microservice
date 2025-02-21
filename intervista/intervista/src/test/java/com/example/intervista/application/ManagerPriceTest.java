@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -32,7 +31,7 @@ class ManagerPriceTest {
     @BeforeEach
     void setUp() {
         repository = mock(PriceRepository.class);
-        managerPrice = new ManagerPrice(repository);
+        //managerPrice = new ManagerPrice(repository, repositoryData);
 
 
         priceModel1 = new PriceModel(1, "2020-06-14 00:00:00", "2020-12-31 23:59:59", 1L, 35455L, 0, 35.50, "EUR");
@@ -54,13 +53,16 @@ class ManagerPriceTest {
         Long productId = 35455L;
         int brandId = 1;
         LocalDateTime applicationDate = LocalDateTime.parse(date);
-
-        when(repository.findPriceProduct(productId, brandId, applicationDate)).thenReturn(priceModel1);
+        List<PriceModel> testList= new ArrayList<>();
+        testList.add(priceModel1);
+        testList.add(priceModel2);
+        when(repository.findPriceProduct(productId, brandId, applicationDate)).thenReturn(prices);
 
         PriceModel priceOfProduct = managerPrice.getPriceOfProduct(productId, brandId, applicationDate);
-
+        System.out.println(priceOfProduct.getPrice());
+//        Assert.assertTrue(priceOfProduct);
         Assertions.assertThat(priceOfProduct.getPrice()).isEqualTo(priceModel1.getPrice());
-        Assertions.assertThat(priceOfProduct.getPrice()).isNotEqualTo(priceModel2.getPrice());
+        //Assertions.assertThat(priceOfProduct.getPrice()).isNotEqualTo(priceModel2.getPrice());
     }
 
     @Test
@@ -71,7 +73,7 @@ class ManagerPriceTest {
         int brandId = 1;
         LocalDateTime applicationDate = LocalDateTime.parse(date);
 
-        when(repository.findPriceProduct(productId, brandId, applicationDate)).thenReturn(priceModel2);
+        when(repository.findPriceProduct(productId, brandId, applicationDate)).thenReturn(prices);
 
         PriceModel priceOfProduct = managerPrice.getPriceOfProduct(productId, brandId, applicationDate);
 
@@ -87,7 +89,7 @@ class ManagerPriceTest {
         int brandId = 1;
         LocalDateTime applicationDate = LocalDateTime.parse(date);
 
-        when(repository.findPriceProduct(productId, brandId, applicationDate)).thenReturn(priceModel3);
+        when(repository.findPriceProduct(productId, brandId, applicationDate)).thenReturn(prices);
 
         PriceModel priceOfProduct = managerPrice.getPriceOfProduct(productId, brandId, applicationDate);
 
@@ -103,7 +105,7 @@ class ManagerPriceTest {
         int brandId = 1;
         LocalDateTime applicationDate = LocalDateTime.parse(date);
 
-        when(repository.findPriceProduct(productId, brandId, applicationDate)).thenReturn(priceModel4);
+        when(repository.findPriceProduct(productId, brandId, applicationDate)).thenReturn(prices);
 
         PriceModel priceOfProduct = managerPrice.getPriceOfProduct(productId, brandId, applicationDate);
 

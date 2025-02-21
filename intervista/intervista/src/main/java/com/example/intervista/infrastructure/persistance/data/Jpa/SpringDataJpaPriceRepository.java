@@ -1,4 +1,4 @@
-package com.example.intervista.infrastructure.persistance;
+package com.example.intervista.infrastructure.persistance.data.Jpa;
 
 import com.example.intervista.infrastructure.entities.Price;
 import org.springframework.data.jpa.repository.JpaRepository;

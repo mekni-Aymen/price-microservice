@@ -16,8 +16,6 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PriceModel {
-    @JsonIgnore
-    private Long id;
     private Integer brandId;
     private LocalDateTime startDate;
     private LocalDateTime endDate;

@@ -2,28 +2,21 @@ package com.example.intervista.infrastructure.entities;
 
 import com.example.intervista.domain.model.PriceModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 /**
  * @author A.Mekni
  */
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity(name = "Price")
-public class Price {
-    @JsonIgnore
+@Document(collection = "Price")
+public class DPrice {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Column(name = "brand_id")
     private Integer brandId;
@@ -51,7 +44,7 @@ public class Price {
     @Column(name = "curr")
     private String curr;
 
-    public Price(Integer brandId, LocalDateTime startDate, LocalDateTime endDate, Long priceList, Long productId, Integer priority, Double price, String curr) {
+    public DPrice(Integer brandId, LocalDateTime startDate, LocalDateTime endDate, Long priceList, Long productId, Integer priority, Double price, String curr) {
         this.brandId = brandId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -61,20 +54,6 @@ public class Price {
         this.price = price;
         this.curr = curr;
     }
-
-    public static Price toEntity(PriceModel price) {
-        Price priceEntity = new Price();
-        priceEntity.setBrandId(price.getBrandId());
-        priceEntity.setCurr(price.getCurr());
-        priceEntity.setEndDate(price.getEndDate());
-        priceEntity.setStartDate(price.getStartDate());
-        priceEntity.setPrice(price.getPrice());
-        priceEntity.setPriceList(price.getPriceList());
-        priceEntity.setProductId(price.getProductId());
-        priceEntity.setPriority(price.getPriority());
-        return priceEntity;
-    }
-
     public PriceModel toModel() {
         return new PriceModel( brandId, startDate, endDate, priceList, productId, priority, price, curr);
     }

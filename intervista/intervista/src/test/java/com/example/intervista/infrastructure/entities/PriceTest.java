@@ -22,14 +22,14 @@ public class PriceTest {
     @Test
     public void testToEntity() {
         // Create the model PriceModel
-        PriceModel priceModel = new PriceModel(1L, 1, LocalDateTime.parse("2020-06-14T00:00:00"),
+        PriceModel priceModel = new PriceModel( 1, LocalDateTime.parse("2020-06-14T00:00:00"),
                 LocalDateTime.parse("2020-06-14T23:59:59"), 1L, 35455L, 1, 35.50, "EUR");
 
         // Test conversion from model to entity
         Price priceEntity = Price.toEntity(priceModel);
 
         assertNotNull(priceEntity);
-        assertEquals(priceEntity.getId(), priceModel.getId());
+
         assertEquals(priceEntity.getBrandId(), priceModel.getBrandId());
         assertEquals(priceEntity.getStartDate(), priceModel.getStartDate());
         assertEquals(priceEntity.getEndDate(), priceModel.getEndDate());
@@ -45,7 +45,7 @@ public class PriceTest {
         PriceModel priceModel = price.toModel();
 
         assertNotNull(priceModel);
-        assertEquals(price.getId(), priceModel.getId());
+
         assertEquals(price.getBrandId(), priceModel.getBrandId());
         assertEquals(price.getStartDate(), priceModel.getStartDate());
         assertEquals(price.getEndDate(), priceModel.getEndDate());

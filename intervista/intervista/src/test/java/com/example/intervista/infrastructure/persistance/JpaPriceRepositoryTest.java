@@ -1,9 +1,10 @@
 package com.example.intervista.infrastructure.persistance;
 
 import com.example.intervista.domain.model.PriceModel;
-import com.example.intervista.domain.port.PriceRepository;
 import com.example.intervista.infrastructure.entities.Price;
 import com.example.intervista.infrastructure.exception.PriceNotFoundException;
+import com.example.intervista.infrastructure.persistance.data.Jpa.JpaPriceRepository;
+import com.example.intervista.infrastructure.persistance.data.Jpa.SpringDataJpaPriceRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -46,15 +48,16 @@ class JpaPriceRepositoryTest {
                 .thenReturn(Arrays.asList(price));
 
         // Calling the method
-        PriceModel result = jpaPriceRepository.findPriceProduct(35455L, 1, applicationDate);
+        List<PriceModel> result = jpaPriceRepository.findPriceProduct(35455L, 1, applicationDate);
 
         // Checking the result
         assertNotNull(result);
-        assertEquals(35455L, result.getProductId());
-        assertEquals(1,result.getBrandId());
-        assertEquals(35.50, result.getPrice());
-        assertEquals(0, result.getPriority());
-        assertEquals(1L,result.getPriceList());
+        assertEquals(1, result.size());
+        assertEquals(35455L, result.get(0).getProductId());
+        assertEquals(1,result.get(0).getBrandId());
+        assertEquals(35.50, result.get(0).getPrice());
+        assertEquals(0, result.get(0).getPriority());
+        assertEquals(1L,result.get(0).getPriceList());
     }
 
     @Test

@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  # Service pour MongoDB
+  mongo:
+    image: mongo:latest
+    container_name: mongo-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  # Service pour l'application Spring Boot
+  springboot-app:
+    build: .
+    container_name: springboot-app-container
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://root:example@mongo:27017/mondb
+    ports:
+      - "8085:8080"
+    depends_on:
+      - mongo
+
+# Volume pour persister les données de MongoDB
+volumes:
+  mongo_data:

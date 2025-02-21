@@ -1,6 +1,7 @@
 package com.example.intervista.infrastructure.persistance;
 
 import com.example.intervista.infrastructure.entities.Price;
+import com.example.intervista.infrastructure.persistance.data.Jpa.SpringDataJpaPriceRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
