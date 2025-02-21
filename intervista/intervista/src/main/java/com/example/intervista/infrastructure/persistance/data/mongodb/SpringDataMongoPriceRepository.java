@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * @author A.Mekni
  */
-public interface SpringDataMongoPriceRepository extends MongoRepository<DPrice,Long>{
-    List<Price> findByProductIdAndBrandIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
+public interface SpringDataMongoPriceRepository<T> extends MongoRepository<DPrice,Long>{
+    List<T> findByProductIdAndBrandIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
             Long productId, int brandId, LocalDateTime startDate, LocalDateTime endDate);
 
     @Override
