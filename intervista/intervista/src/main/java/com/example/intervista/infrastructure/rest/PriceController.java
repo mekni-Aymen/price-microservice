@@ -35,5 +35,18 @@ public class PriceController {
         PriceModel priceOfProduct = managerPrice.getPriceOfProduct(productId, brandId, applicationDate);
         return ResponseEntity.status(HttpStatus.OK).body(priceOfProduct);
     }
+
+    @GetMapping("/data/prices")
+    public ResponseEntity<?> getPriceMongo(
+            @RequestParam("applicationDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime applicationDate,
+            @RequestParam("productId") Long productId,
+            @RequestParam("brandId") Integer brandId){
+
+        if (applicationDate == null || productId == null || brandId == null){
+            throw new ParameterNotFoundExcption("Erreur: Missing Parameter");
+        }
+        PriceModel priceOfProduct = managerPrice.getPriceOfProductMongo(productId, brandId, applicationDate);
+        return ResponseEntity.status(HttpStatus.OK).body(priceOfProduct);
+    }
 }
 
