@@ -17,31 +17,13 @@ public class DPrice {
 
     @Id
     private String id;
-
-    @Column(name = "brand_id")
     private Integer brandId;
-
-    @Column(name = "start_date")
     private LocalDateTime startDate;
-
-    @Column(name = "end_date")
     private LocalDateTime endDate;
-
-    @Column(name = "price_list")
     private Long priceList;
-
-    @Column(name = "product_id")
     private Long productId;
-
-    @JsonIgnore
-    @Column(name = "priority")
     private Integer priority;
-
-    @Column(name = "price")
     private Double price;
-
-    @JsonIgnore
-    @Column(name = "curr")
     private String curr;
 
     public DPrice(Integer brandId, LocalDateTime startDate, LocalDateTime endDate, Long priceList, Long productId, Integer priority, Double price, String curr) {
