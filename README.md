@@ -10,7 +10,7 @@
 
 
 				com.example.microservice
-				|___ domain				# main business
+				|___ domain			# main business
 				|    |__ model
 				|	 |__ port
 				|	 |__ service
