@@ -6,7 +6,6 @@ import com.example.intervista.infrastructure.entities.DPrice;
 import com.example.intervista.infrastructure.entities.Price;
 import com.example.intervista.infrastructure.exception.PriceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -24,10 +23,11 @@ private final PriceRepository<PriceModel, Price> repository;
 
 private final PriceRepository<PriceModel, DPrice> repositoryData;
 
-    public ManagerPrice(@Qualifier("JpaPriceRepository") PriceRepository repository, @Qualifier("MongodDBPriceRepository")PriceRepository repositoryData) {
+    public ManagerPrice(PriceRepository<PriceModel, Price> repository, PriceRepository<PriceModel, DPrice> repositoryData) {
         this.repository = repository;
         this.repositoryData = repositoryData;
     }
+
 
     /**
      *
@@ -49,6 +49,24 @@ private final PriceRepository<PriceModel, DPrice> repositoryData;
             log.error("No price found for productId: "+productId);
             throw e;
         } catch (Exception e) {
+            throw new RuntimeException("An unexpected error occurred while retrieving the price", e);
+        }
+    }
+
+    public PriceModel getPriceOfProductMongo(Long productId, int brandId, LocalDateTime applicationDate) {
+
+        try {
+            List<PriceModel> prices = repositoryData.findPriceProduct(productId,brandId,applicationDate);
+
+            return prices.stream()
+                    //.max((p1, p2) -> Integer.compare(p1.getPriority(), p2.getPriority()))
+                    .max(Comparator.comparingInt(PriceModel::getPriority))
+                    .orElseThrow(() -> new PriceNotFoundException("No price found for productId: " + productId));
+        } catch (PriceNotFoundException e) {
+            log.error("No price found for productId: "+productId);
+            throw e;
+        } catch (Exception e) {
+            log.error(String.valueOf(e));
             throw new RuntimeException("An unexpected error occurred while retrieving the price", e);
         }
     }
