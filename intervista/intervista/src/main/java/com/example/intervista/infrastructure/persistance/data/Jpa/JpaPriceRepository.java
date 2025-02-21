@@ -2,7 +2,6 @@ package com.example.intervista.infrastructure.persistance.data.Jpa;
 
 import com.example.intervista.domain.model.PriceModel;
 import com.example.intervista.domain.port.PriceRepository;
-import com.example.intervista.infrastructure.entities.DPrice;
 import com.example.intervista.infrastructure.entities.Price;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -19,11 +18,12 @@ import java.util.stream.Stream;
 @Slf4j
 public class JpaPriceRepository implements PriceRepository<PriceModel,Price> {
 
-    private final SpringDataJpaPriceRepository repository;
+    private final SpringDataJpaPriceRepository<Price> repository;
 
-    public JpaPriceRepository(SpringDataJpaPriceRepository repository) {
+    public JpaPriceRepository(SpringDataJpaPriceRepository<Price> repository) {
         this.repository = repository;
     }
+
 
     @Override
     public List<PriceModel> findPriceProduct(Long productId, int brandId, LocalDateTime applicationDate) {
