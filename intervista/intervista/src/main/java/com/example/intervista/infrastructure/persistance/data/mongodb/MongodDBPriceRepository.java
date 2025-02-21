@@ -3,7 +3,6 @@ package com.example.intervista.infrastructure.persistance.data.mongodb;
 import com.example.intervista.domain.model.PriceModel;
 import com.example.intervista.domain.port.PriceRepository;
 import com.example.intervista.infrastructure.entities.DPrice;
-import com.example.intervista.infrastructure.entities.Price;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -19,12 +18,12 @@ import java.util.stream.Stream;
 @Slf4j
 public class MongodDBPriceRepository implements PriceRepository<PriceModel,DPrice> {
 
-    private final SpringDataMongoPriceRepository repository;
+    private final SpringDataMongoPriceRepository<DPrice> repository;
 
-
-    public MongodDBPriceRepository(SpringDataMongoPriceRepository repository) {
+    public MongodDBPriceRepository(SpringDataMongoPriceRepository<DPrice> repository) {
         this.repository = repository;
     }
+
 
     @Override
     public List<PriceModel> findPriceProduct(Long productId, int brandId, LocalDateTime applicationDate) {
@@ -32,7 +31,7 @@ public class MongodDBPriceRepository implements PriceRepository<PriceModel,DPric
         return repository.findByProductIdAndBrandIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
                 productId, brandId, applicationDate, applicationDate)
                 .stream()
-                .map(Price::toModel)
+                .map(DPrice::toModel)
                 .collect(Collectors.toList());
     }
 
