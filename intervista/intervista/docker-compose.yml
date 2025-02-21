@@ -18,7 +18,7 @@ services:
     build: .
     container_name: springboot-app-container
     environment:
-      SPRING_DATA_MONGODB_URI: mongodb://root:example@mongo:27017/mondb
+      SPRING_DATA_MONGODB_URI: mongodb://root:example@mongo:27017/mondb?authSource=admin
     ports:
       - "8085:8080"
     depends_on:
