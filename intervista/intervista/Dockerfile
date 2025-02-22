@@ -16,4 +16,5 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 ## run this command in the same location of your file #Dockerfile
 ## to create image of your application with the name of the image <springboot-mongodb-app>
 # docker build -t springboot-mongodb-app .
+#docker-compose up --build
 
