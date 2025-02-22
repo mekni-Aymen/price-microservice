@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  */
 
 @ControllerAdvice
-class GlobalExceptionHandler {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(PriceNotFoundException.class)
     public ResponseEntity<String> handlePriceNotFoundException(PriceNotFoundException ex) {
