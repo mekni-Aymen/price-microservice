@@ -18,9 +18,9 @@ import java.util.stream.Stream;
 @Slf4j
 public class JpaPriceRepository implements PriceRepository<PriceModel,Price> {
 
-    private final SpringDataJpaPriceRepository<Price> repository;
+    private final SpringDataJpaPriceRepository repository;
 
-    public JpaPriceRepository(SpringDataJpaPriceRepository<Price> repository) {
+    public JpaPriceRepository(SpringDataJpaPriceRepository repository) {
         this.repository = repository;
     }
 

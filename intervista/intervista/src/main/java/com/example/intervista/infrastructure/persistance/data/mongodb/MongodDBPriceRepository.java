@@ -18,9 +18,9 @@ import java.util.stream.Stream;
 @Slf4j
 public class MongodDBPriceRepository implements PriceRepository<PriceModel,DPrice> {
 
-    private final SpringDataMongoPriceRepository<DPrice> repository;
+    private final SpringDataMongoPriceRepository repository;
 
-    public MongodDBPriceRepository(SpringDataMongoPriceRepository<DPrice> repository) {
+    public MongodDBPriceRepository(SpringDataMongoPriceRepository repository) {
         this.repository = repository;
     }
 
