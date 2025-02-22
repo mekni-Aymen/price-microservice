@@ -53,6 +53,14 @@ private final PriceRepository<PriceModel, DPrice> repositoryData;
         }
     }
 
+
+    /**
+     * In case of mongodb database
+     * @param productId is id of the product what we are looking for
+     * @param brandId
+     * @param applicationDate
+     * @return Price of product
+     */
     public PriceModel getPriceOfProductMongo(Long productId, int brandId, LocalDateTime applicationDate) {
 
         try {
