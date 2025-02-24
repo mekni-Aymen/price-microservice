@@ -1,5 +1,5 @@
 
-## The main feature of hexagonal architecture
+## the main feature of hexagonal architecture
 
 - you can easly tested each layer sparetly.
 - you can run automated regression-test against it.
@@ -114,11 +114,6 @@ and aims towards it can modify at the **application** layer without touching the
 
 ### Testing:
 Among the main objectives of using hexagonal architecture is to prove test each layer separately
-
-
-
-
-
 
 
 
